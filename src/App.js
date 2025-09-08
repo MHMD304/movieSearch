@@ -1,23 +1,49 @@
-import logo from './logo.svg';
 import './App.css';
+import FavouritesMovieList from './FavouritesMovieList';
+import MovieModal from './MovieModal';
+import SearchMovie from './SearchMovie';
+import React from 'react';
 
 function App() {
+   const [favourites,setFavourites] = React.useState([])
+   const [isModalOpen,setIsModalOpen] = React.useState(false);
+   const [selectedMovie,setSelectedMovie] = React.useState(null);
+
+   const showModal = (movie) =>{
+    setIsModalOpen(true);
+    setSelectedMovie(movie);
+   } 
+   const closeModal =  ()=>{
+    setIsModalOpen(false)
+    setSelectedMovie(null);
+   }
+   const AddFavourites = (movies)=>{
+      const moviesArray = Array.isArray(movies) ? movies : [movies];
+      setFavourites(prev => [
+        ...moviesArray.filter(
+        movie => !prev.some(fav => fav.imdbID === movie.imdbID)
+        ),
+        ...prev
+  ]);}
+  const RemoveFavourites = (movie)=>{
+    setFavourites(prev => prev.filter(fav => fav.imdbID !== movie.imdbID));
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <SearchMovie AddFavourites={AddFavourites}/>
+      <FavouritesMovieList 
+        favourites={favourites} 
+        RemoveFavourites={RemoveFavourites}
+        showModal={showModal}
+        />
+      { 
+      selectedMovie!==null?(
+      <MovieModal
+        isModalOpen={isModalOpen}
+        movie = {selectedMovie}
+        closeModal = {closeModal}
+      /> ):null
+      }
     </div>
   );
 }

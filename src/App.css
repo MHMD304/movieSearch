@@ -1,38 +1,427 @@
-.App {
-  text-align: center;
+* {
+  box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+html {
+  margin: 0;
+  padding: 0;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.ReactModal__Body--open {
+  width: 100%;
 }
 
-.App-header {
-  background-color: #282c34;
+.app {
+  background-color: #d4c5b9;
   min-height: 100vh;
+  width: 100%;
+  max-width: 100vw; 
+  color: black;
+  padding: 10px;
+  overflow-x: hidden; 
+}
+/* =============================================================================
+   SEARCH CONTAINER
+   ============================================================================= */
+.search-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  gap: 10px;
+  margin: 10px;
+  width: 100%;
+}
+
+.search-container h1 {
+  font-size: 1.5em;
+  font-weight: 900;
+  color: #5a5854;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-align: center;
+}
+
+.search-container input {
+  border-radius: 50px;
+  width: min(70%, 400px); 
+  height: 40px;
+  padding: 0 15px;
+  text-align: start;
+  border: 1px solid #ddd;
+  transition: all 0.3s ease-in-out;
+}
+
+.search-container input:focus,
+.search-container input:active {
+  outline: none;
+  border: 2px solid #e85a4f;
+}
+
+.search-container input:hover {
+  cursor: text;
+  transform: scale(1.02);
+}
+
+.search-container button {
+  border-radius: 50px;
+  background-color: #e85a4f; 
+  border: 1px solid #e85a4f;
+  width: min(20%, 150px); 
+  min-width: 80px; 
+  height: 40px;
   color: white;
+  font-weight: 600;
+  transition: all 0.3s ease-in-out;
+}
+.search-container button:hover {
+  cursor: pointer;
+  transform: scale(1.05);
+  background-color: #d2463c; 
+  border-color: #d2463c;
+}
+.search-container button:disabled{
+  background-color: #7e7e7d;
+  color: white;
+  border: 1px solid white;
+}
+.search-container button:disabled:hover{
+  cursor: not-allowed;
+  transform: none;
+  border: none;
+  border-color: none;
+  background-color: #7e7e7d;
+}
+/* =============================================================================
+   CARDS CONTAINER
+   ============================================================================= */
+.cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  padding: 20px;
+  justify-items: center;
+  width: 100%;
+  max-width: 1200px; 
+  margin: 0 auto;
 }
 
-.App-link {
-  color: #61dafb;
+
+.card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 350px;
+  gap: 10px;
+  padding: 15px;
+  background-color: #fefdfb; 
+  border: 1px solid #e8e6e3;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease-in-out;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.card-body {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.card-header {
+  display: flex;
+  flex-direction: column;
+  font-size: 1.1em;
+  font-weight: 700;
+   color: #5a5854;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-align: center;
+}
+
+.card:hover {
+  cursor: pointer;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.image-container img {
+  width: 100%;
+  height: auto;
+  max-height: 500px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.card p:first-child {
+  font-size: 0.9em;
+  font-weight: 500;
+  background-color: #ff6347;
+  padding: 4px 12px;
+  border-radius: 15px;
+  color: #5a5a50;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-align: center;
+  margin: 5px 0;
+  line-height: 1.4;
+}
+
+.card h3 {
+  font-size: 1.2em;
+  font-weight: 700;
+  text-align: center;
+  color: #5a5854;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 10px 0;
+}
+
+.card button {
+  border-radius: 50px;
+  background-color: #e85a4f; 
+  border: 1px solid #e85a4f;
+  width: 60%;
+  max-width: 150px;
+  height: 40px;
+  color: white;
+  font-weight: 600;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+  align-self: center;
+}
+
+.card button:hover {
+  transform: translateY(-1px);
+  background-color: #e5533d;
+  border-color: #e5533d;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+/* =============================================================================
+   MODAL CONTAINER
+   ============================================================================= */
+.ReactModal__Overlay {
+  background-color: rgba(0, 0, 0, 0.6) !important;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+
+.modal {
+  position: relative;
+  width: 90%;
+  max-width: 600px;
+  max-height: 90vh;
+  border-radius: 12px;
+  background-color: #fefdfb; 
+  border: 2px solid #6b6b61; 
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  outline: none;
+  overflow: hidden;
+}
+
+
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  max-height: 85vh;
+  overflow-y: auto;
+  position: relative;
+}
+
+
+.modal-content > span {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 28px;
+  font-weight: bold;
+  color: #5a5a50;
+  cursor: pointer;
+  z-index: 10;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: rgba(254, 253, 251, 0.95);
+  transition: all 0.3s ease;
+}
+
+.modal-content > span:hover {
+  background-color: #e85a4f;
+  color: white;
+  transform: scale(1.1);
+}
+
+
+.modal-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  padding: 30px 20px 20px 20px;
+  background: linear-gradient(135deg, #faf9f7 0%, #f0efec 100%);
+}
+
+.modal-header-text {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  text-align: center;
+  flex-wrap: wrap;
+}
+
+.modal-header-text h2 {
+  font-size: 1.8em;
+  font-weight: 700;
+  color: #2c2c2c;
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.modal-header-text p {
+  font-size: 1.2em;
+  font-weight: 600;
+  color: #666;
+  margin: 0;
+  padding: 4px 12px;
+  background-color: #ff6347;
+  color: white;
+  border-radius: 15px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.modal img {
+  width: 200px;
+  height: 300px;
+  border-radius: 12px;
+  object-fit: cover;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+}
+
+.modal img:hover {
+  transform: scale(1.02);
+}
+
+
+.modal-body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background-color: #fefdfb;
+  padding: 25px;
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.modal-body p {
+  margin: 0;
+  padding: 8px 0;
+  font-size: 0.95em;
+  line-height: 1.5;
+  color: #333;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.modal-body p:last-child {
+  border-bottom: none;
+}
+
+.modal-body strong {
+  color: #5a5854;
+  font-weight: 600;
+  display: inline-block;
+  min-width: 80px;
+  margin-right: 8px;
+}
+/* =============================================================================
+   RESPONSIVE DESIGN
+   ============================================================================= */
+@media (max-width: 768px) {
+  .app {
+    padding: 5px;
   }
-  to {
-    transform: rotate(360deg);
+  
+  .cards-container {
+    grid-template-columns: 1fr;
+    gap: 15px;
+    padding: 15px 10px;
   }
+  
+  .search-container input {
+    width: 85%;
+  }
+  
+  .search-container button {
+    width: 40%;
+  }
+  
+  .card {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .search-container h1 {
+    font-size: 1.3em;
+  }
+  
+  .search-container input,
+  .search-container button {
+    height: 35px;
+  }
+  
+  .card {
+    padding: 12px;
+  }
+  
+  .image-container img {
+    height: 180px;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0f172a; 
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #ff6347, #983c2b); 
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #f72f0c, #983c2b); 
+  cursor: pointer;
+}
+
+
+::-webkit-scrollbar-thumb-alt {
+  background: #ff6347; 
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb-alt:hover {
+  background: #983c2b; 
 }
