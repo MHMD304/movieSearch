@@ -2,7 +2,7 @@ import React from "react";
 export default function SearchMovie(props) {
     const [query,setQuery] = React.useState("");
     const [loading,setLoading] = React.useState(false);
-    const api_key =  "4249de50"; 
+    const api_key =  "Your API Key from OMDb"; 
     const search = async () => {
     if (!query) return;
     setLoading(true); 
